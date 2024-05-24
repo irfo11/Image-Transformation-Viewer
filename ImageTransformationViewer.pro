@@ -9,14 +9,29 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    imgtools.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    negativetransformationdialog.cpp
 
 HEADERS += \
-    mainwindow.h
+    imgtools.h \
+    mainwindow.h \
+    negativetransformationdialog.h
 
 FORMS += \
-    mainwindow.ui
+    mainwindow.ui \
+    negativetransformationdialog.ui
+
+# Adding Qt libraries
+INCLUDEPATH += C:\opencv\build\include
+
+LIBS += C:\opencv-build\bin\libopencv_core490.dll
+LIBS += C:\opencv-build\bin\libopencv_highgui490.dll
+LIBS += C:\opencv-build\bin\libopencv_imgcodecs490.dll
+LIBS += C:\opencv-build\bin\libopencv_imgproc490.dll
+LIBS += C:\opencv-build\bin\libopencv_features2d490.dll
+LIBS += C:\opencv-build\bin\libopencv_calib3d490.dll
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
