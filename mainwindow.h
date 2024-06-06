@@ -4,7 +4,9 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QListWidgetItem>
+
 #include "negativetransformationdialog.h"
+#include "logtransformationdialog.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -24,7 +26,7 @@ public:
     ~MainWindow();
 
 
-private slots:
+public slots:
     void on_resetButton_clicked();
 
     void on_transformationsList_itemDoubleClicked(QListWidgetItem *item);
@@ -40,5 +42,6 @@ private:
     cv::Mat transformed_img;
 
     NegativeTransformationDialog* negativeTransformationDialog = nullptr;
+    LogTransformationDialog* logTransformationDialog = nullptr;
 };
 #endif // MAINWINDOW_H

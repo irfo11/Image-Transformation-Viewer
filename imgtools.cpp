@@ -7,6 +7,15 @@ void negativeTransform(const cv::Mat& src, cv::Mat& dst) {
     cv::bitwise_not(src, dst);
 }
 
+void logTransform(const cv::Mat& src, cv::Mat& dst, double c) {
+    cv::Mat srcCopy = cv::Mat();
+    src.convertTo(srcCopy, CV_32F);
+    dst = srcCopy + 1;
+    cv::log(dst, dst);
+    dst *= c;
+    dst.convertTo(dst, CV_8U);
+}
+
 QPixmap matToPixmap(cv::Mat src, QImage::Format format, int pixWidth, int pixHeight) {
     int bpp=src.channels();
     QImage img(src.cols,src.rows,format);

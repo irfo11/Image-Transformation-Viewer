@@ -1,6 +1,8 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
+#include "abstracttransformationdialog.h"
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -8,7 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
 
     QStringList transformationsList({
                                            "Negative",
-                                           "Log",
+                                           "Logarithm",
                                            "Gamma"
                                        });
 
@@ -58,13 +60,12 @@ void MainWindow::on_resetButton_clicked()
 void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
 {
     qDebug() << item->text();
-    item->setHidden(true);
-    if(item->text().compare("Negative") == 0) {
-        if(negativeTransformationDialog == nullptr) {
-            negativeTransformationDialog = new NegativeTransformationDialog(this, item, transformed_img);
-            connect(negativeTransformationDialog, SIGNAL(updateImage()), this, SLOT(showImage()));
-        }
-        negativeTransformationDialog->show();
+    QDialog* transformationDialog = nullptr;
+    if(item->text().compare("Negative") == 0)
+    {
+        transformationDialog = new NegativeTransformationDialog(this, transformed_img);
+    } else if(item->text().compare("Logarithm") == 0) {
+        transformationDialog = new LogTransformationDialog(this, transformed_img);
     }
 }
 

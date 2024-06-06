@@ -1,38 +1,34 @@
 #include "negativetransformationdialog.h"
-#include "ui_negativetransformationdialog.h"
+#include "ui_abstracttransformationdialog.h"
 
-NegativeTransformationDialog::NegativeTransformationDialog(QWidget *parent, QListWidgetItem* item,
-                                                           cv::Mat& img) :
-    QDialog(parent),
-    ui(new Ui::NegativeTransformationDialog),
-    item(item),
-    img(img)
+#include <QPushButton>
+#include <QFormLayout>
+#include <QCheckBox>
+#include <mainwindow.h>
+
+NegativeTransformationDialog::NegativeTransformationDialog(QWidget *parent, cv::Mat& img) :
+    AbstractTransformationDialog(parent, img)
 {
-    ui->setupUi(this);
+    auto negativeLabel = new QLabel("Negative:", this);
+    auto negativeCheckBox = new QCheckBox(this);
+    connect(negativeCheckBox, &QCheckBox::stateChanged, this, &NegativeTransformationDialog::on_negativeCheckBox_stateChanged);
+    AbstractTransformationDialog::ui->parameterFormLayout->addRow(negativeLabel, negativeCheckBox);
 }
 
 NegativeTransformationDialog::~NegativeTransformationDialog()
 {
     qDebug() << "Deleting dialog";
-    delete ui;
 }
 
-void NegativeTransformationDialog::on_pushButton_clicked()
+void NegativeTransformationDialog::on_negativeCheckBox_stateChanged(int state)
 {
-    close();
-}
-
-
-void NegativeTransformationDialog::on_horizontalSlider_sliderMoved(int position)
-{
-    imgtools::negativeTransform(img, img);
+    transform();
     emit updateImage();
 }
 
-
-void NegativeTransformationDialog::on_NegativeTransformationDialog_finished(int result)
-{
-    qDebug() << "yo";
-    item->setHidden(false);
+void NegativeTransformationDialog::transform() {
+    imgtools::negativeTransform(this->transformed, this->transformed);
 }
+
+
 

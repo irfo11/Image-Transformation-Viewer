@@ -9,19 +9,23 @@ CONFIG += c++17
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    abstracttransformationdialog.cpp \
     imgtools.cpp \
+    logtransformationdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     negativetransformationdialog.cpp
 
 HEADERS += \
+    abstracttransformationdialog.h \
     imgtools.h \
+    logtransformationdialog.h \
     mainwindow.h \
     negativetransformationdialog.h
 
 FORMS += \
-    mainwindow.ui \
-    negativetransformationdialog.ui
+    abstracttransformationdialog.ui \
+    mainwindow.ui
 
 # Adding Qt libraries
 INCLUDEPATH += C:\opencv\build\include

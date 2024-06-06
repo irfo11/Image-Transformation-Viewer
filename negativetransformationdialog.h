@@ -1,8 +1,7 @@
 #ifndef NEGATIVETRANSFORMATIONDIALOG_H
 #define NEGATIVETRANSFORMATIONDIALOG_H
 
-#include <QDialog>
-#include <QListWidgetItem>
+#include "abstracttransformationdialog.h"
 
 #include "imgtools.h"
 
@@ -12,30 +11,23 @@ namespace Ui {
 class NegativeTransformationDialog;
 }
 
-class NegativeTransformationDialog : public QDialog
+class NegativeTransformationDialog : public AbstractTransformationDialog
 {
     Q_OBJECT
 
 public:
-    explicit NegativeTransformationDialog(QWidget *parent, QListWidgetItem* item,
-                                          cv::Mat& img);
-    ~NegativeTransformationDialog();
+    explicit NegativeTransformationDialog(QWidget *parent, cv::Mat& img);
+    virtual ~NegativeTransformationDialog();
+    void transform() override;
 
 private slots:
-    void on_pushButton_clicked();
+    void on_negativeCheckBox_stateChanged(int state);
 
-    void on_horizontalSlider_sliderMoved(int position);
-
-    void on_NegativeTransformationDialog_finished(int result);
-
-signals:
-    void updateImage();
+//signals:
+  //  void updateImage();
 
 private:
-    Ui::NegativeTransformationDialog *ui;
-    QListWidgetItem* item;
-    cv::Mat& img;
-    int negative;
+
 };
 
 #endif // NEGATIVETRANSFORMATIONDIALOG_H
