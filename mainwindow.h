@@ -7,6 +7,10 @@
 
 #include "negativetransformationdialog.h"
 #include "logtransformationdialog.h"
+#include "gammatransformationdialog.h"
+#include "histogramequalizationdialog.h"
+#include "highlightingintensitylevelslicingdialog.h"
+#include "binaryintensityslicingdialog.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -40,8 +44,5 @@ private:
     QGraphicsScene* dftScene = nullptr;
     cv::Mat original_img;
     cv::Mat transformed_img;
-
-    NegativeTransformationDialog* negativeTransformationDialog = nullptr;
-    LogTransformationDialog* logTransformationDialog = nullptr;
 };
 #endif // MAINWINDOW_H

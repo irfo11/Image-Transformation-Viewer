@@ -16,11 +16,11 @@ LogTransformationDialog::LogTransformationDialog(QWidget *parent, cv::Mat& img) 
 
 void LogTransformationDialog::transform() {
     imgtools::logTransform(this->original, this->transformed, cDoubleSpinBox->value());
+    emit updateImage();
 }
 
 void LogTransformationDialog::on_cDoubleSpinBox_valueChanged(double arg1)
 {
     transform();
-    emit updateImage();
 }
 

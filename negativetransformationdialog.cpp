@@ -23,11 +23,11 @@ NegativeTransformationDialog::~NegativeTransformationDialog()
 void NegativeTransformationDialog::on_negativeCheckBox_stateChanged(int state)
 {
     transform();
-    emit updateImage();
 }
 
 void NegativeTransformationDialog::transform() {
     imgtools::negativeTransform(this->transformed, this->transformed);
+    emit updateImage();
 }
 
 

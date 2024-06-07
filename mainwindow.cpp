@@ -11,14 +11,16 @@ MainWindow::MainWindow(QWidget *parent)
     QStringList transformationsList({
                                            "Negative",
                                            "Logarithm",
-                                           "Gamma"
+                                           "Gamma",
+                                           "Histogram equalization",
+                                           "Binary intenisity level slicing",
+                                           "Highlighting intensity level slicing"
                                        });
 
     ui->setupUi(this);
     ui->transformationsList->addItems(transformationsList);
 
-    original_img = imread("C:\\Users\\Irfo\\Documents\\fakultet\\IV semestar"
-                        "\\digitalno procesiranje signala\\seminarski\\slike\\Slika1_mamografija.png", cv::IMREAD_GRAYSCALE);
+    original_img = imread("C://Users//Irfo//Documents//fakultet//IV semestar//digitalno procesiranje signala//seminarski//slike//Slika5b_contrast.png", cv::IMREAD_GRAYSCALE);
     if(original_img.empty()) {
         qDebug() << "Treba nesto smisliti";
     }
@@ -66,6 +68,14 @@ void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
         transformationDialog = new NegativeTransformationDialog(this, transformed_img);
     } else if(item->text().compare("Logarithm") == 0) {
         transformationDialog = new LogTransformationDialog(this, transformed_img);
+    } else if(item->text().compare("Gamma") == 0) {
+        transformationDialog = new GammaTransformationDialog(this, transformed_img);
+    } else if(item->text().compare("Histogram equalization") == 0) {
+        transformationDialog = new HistogramEqualizationDialog(this, transformed_img);
+    } else if(item->text().compare("Highlighting intensity level slicing") == 0) {
+        transformationDialog = new HighlightingIntensityLevelSlicingDialog(this, transformed_img);
+    } else if(item->text().compare("Binary intenisity level slicing") == 0) {
+        transformationDialog = new BinaryIntensityLevelSlicingDialog(this, transformed_img);
     }
 }
 

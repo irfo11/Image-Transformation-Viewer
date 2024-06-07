@@ -16,6 +16,43 @@ void logTransform(const cv::Mat& src, cv::Mat& dst, double c) {
     dst.convertTo(dst, CV_8U);
 }
 
+
+//Za gamma=1 ne dobije se originalna slika
+void gammaTransform(const cv::Mat& src, cv::Mat& dst, double c, double g) {
+    cv::Mat srcCopy = cv::Mat();
+    src.convertTo(srcCopy, CV_32F);
+    cv::pow(srcCopy, g, dst);
+    dst *= c;
+    dst.convertTo(dst, CV_8U);
+}
+
+void histogramEqualization(const cv::Mat& src, cv::Mat& dst) {
+    cv::equalizeHist(src, dst);
+}
+
+typedef uint8_t pixel;
+
+void highlightingIntensityLevelSlicing(const cv::Mat& src, cv::Mat& dst, int min, int max) {
+    src.copyTo(dst);
+    for(int i=0; i<dst.rows; i++) {
+        for(int j=0; j<dst.cols; j++) {
+            if(dst.at<pixel>(i, j) >= min && dst.at<pixel>(i, j) <= max)
+                   dst.at<pixel>(i, j) = 230;
+        }
+    }
+}
+
+void binaryIntensityLevelSlicing(const cv::Mat& src, cv::Mat& dst, int min, int max) {
+    src.copyTo(dst);
+    for(int i=0; i<dst.rows; i++) {
+        for(int j=0; j<dst.cols; j++) {
+            if(dst.at<pixel>(i, j) >= min && dst.at<pixel>(i, j) <= max)
+                   dst.at<pixel>(i, j) = 230;
+            else dst.at<pixel>(i, j) = 0;
+        }
+    }
+}
+
 QPixmap matToPixmap(cv::Mat src, QImage::Format format, int pixWidth, int pixHeight) {
     int bpp=src.channels();
     QImage img(src.cols,src.rows,format);

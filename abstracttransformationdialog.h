@@ -27,7 +27,7 @@ public:
     void restoreToOriginal() {
         this->original.copyTo(this->transformed);
         emit updateImage();
-        qDebug() << "should emit";
+        qDebug() << "restoring";
     }
 
 private:

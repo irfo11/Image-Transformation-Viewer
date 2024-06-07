@@ -10,6 +10,10 @@ CONFIG += c++17
 
 SOURCES += \
     abstracttransformationdialog.cpp \
+    binaryintensityslicingdialog.cpp \
+    gammatransformationdialog.cpp \
+    highlightingintensitylevelslicingdialog.cpp \
+    histogramequalizationdialog.cpp \
     imgtools.cpp \
     logtransformationdialog.cpp \
     main.cpp \
@@ -18,6 +22,10 @@ SOURCES += \
 
 HEADERS += \
     abstracttransformationdialog.h \
+    binaryintensityslicingdialog.h \
+    gammatransformationdialog.h \
+    highlightingintensitylevelslicingdialog.h \
+    histogramequalizationdialog.h \
     imgtools.h \
     logtransformationdialog.h \
     mainwindow.h \

@@ -29,12 +29,12 @@ void AbstractTransformationDialog::on_applyButton_clicked()
 
 void AbstractTransformationDialog::on_cancelButton_clicked()
 {
-    restoreToOriginal();
     reject();
 }
 
 AbstractTransformationDialog::~AbstractTransformationDialog()
 {
     qDebug() << "calling parent destructor";
+    restoreToOriginal();
     delete ui;
 }
