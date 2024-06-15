@@ -1,6 +1,7 @@
 #include "imgtools.h"
 #include <cmath>
 #include <QtCore> //qDebug
+#include <time.h>
 
 namespace imgtools {
 
@@ -147,6 +148,39 @@ void applyLowPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize) 
 void applyHighPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize) {
     cv::blur(src, dst, ksize);
     dst = src-dst;
+}
+
+bool AddGaussianNoise(const cv::Mat& mSrc, cv::Mat &mDst, double Mean, double StdDev)
+{
+
+    cv::Mat mGaussian_noise = cv::Mat(mSrc.size(),CV_8U);
+    randn(mGaussian_noise, cv::Scalar::all(Mean), cv::Scalar::all(StdDev));
+
+    mSrc.convertTo(mDst,CV_8U);
+    addWeighted(mDst, 1.0, mGaussian_noise, 1.0, 0.0, mDst);
+
+    return true;
+}
+
+void AddSaltAndPepperNoise(const cv::Mat& src, cv::Mat& dst, int probability)
+{
+    CV_Assert(probability <= 100);
+    srand(time(NULL));
+
+    src.copyTo(dst);
+
+    for(int i=1; i<dst.rows; i++)
+    {
+        for(int j=1; j<dst.cols; j++)
+        {
+            if(rand()%100 < probability) //add noise
+            {
+                if(rand()%2==1) dst.at<int>(i, j) = 0;
+                else dst.at<int>(i, j) = 255;
+            }
+        }
+    }
+
 }
 
 cv::Mat plotFourrierTransform(const cv::Mat src) {

@@ -12,6 +12,7 @@ SOURCES += \
     abstracttransformationdialog.cpp \
     binaryintensityslicingdialog.cpp \
     gammatransformationdialog.cpp \
+    gaussiannoisedialog.cpp \
     highlightingintensitylevelslicingdialog.cpp \
     highpassfilterdialog.cpp \
     histogramequalizationdialog.cpp \
@@ -20,12 +21,14 @@ SOURCES += \
     lowpassfilterdialog.cpp \
     main.cpp \
     mainwindow.cpp \
-    negativetransformationdialog.cpp
+    negativetransformationdialog.cpp \
+    saltandpeppernoisedialog.cpp
 
 HEADERS += \
     abstracttransformationdialog.h \
     binaryintensityslicingdialog.h \
     gammatransformationdialog.h \
+    gaussiannoisedialog.h \
     highlightingintensitylevelslicingdialog.h \
     highpassfilterdialog.h \
     histogramequalizationdialog.h \
@@ -33,7 +36,8 @@ HEADERS += \
     logtransformationdialog.h \
     lowpassfilterdialog.h \
     mainwindow.h \
-    negativetransformationdialog.h
+    negativetransformationdialog.h \
+    saltandpeppernoisedialog.h
 
 FORMS += \
     abstracttransformationdialog.ui \

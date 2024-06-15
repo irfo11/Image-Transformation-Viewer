@@ -19,8 +19,14 @@ MainWindow::MainWindow(QWidget *parent)
                                            "High pass filter"
                                        });
 
+    QStringList noiseList({
+                              "Gaussian noise",
+                              "Salt and pepper noise"
+                          });
+
     ui->setupUi(this);
     ui->transformationsList->addItems(transformationsList);
+    ui->noisesList->addItems(noiseList);
 
     original_img = imread("C://Users//Irfo//Documents//fakultet//IV semestar//digitalno procesiranje signala//seminarski//slike//Slika5b_contrast.png", cv::IMREAD_GRAYSCALE);
     if(original_img.empty()) {
@@ -32,7 +38,7 @@ MainWindow::MainWindow(QWidget *parent)
     histogramScene = new QGraphicsScene(ui->histogramGraphicsView);
     dftScene = new QGraphicsScene(ui->spectrumGraphicsView);
 
-    //imgtools::applyLowPassFilter(transformed_img, transformed_img, 200);
+    //imgtools::AddGaussianNoise(transformed_img, transformed_img, 10, 20);
 
     showImage();
 }
@@ -85,6 +91,17 @@ void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
         transformationDialog = new LowPassFilterDialog(this, transformed_img);
     } else if(item->text().compare("High pass filter") == 0) {
         transformationDialog = new HighPassFilterDialog(this, transformed_img);
+    }
+}
+
+
+void MainWindow::on_noisesList_itemDoubleClicked(QListWidgetItem *item)
+{
+    QDialog* noiseDialog = nullptr;
+    if(item->text().compare("Gaussian noise") == 0) {
+        noiseDialog = new GaussianNoiseDialog(this, transformed_img);
+    } else if(item->text().compare("Salt and pepper noise") == 0) {
+        noiseDialog = new SaltAndPepperNoiseDialog(this, transformed_img);
     }
 }
 

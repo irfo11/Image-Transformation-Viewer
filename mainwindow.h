@@ -13,6 +13,8 @@
 #include "binaryintensityslicingdialog.h"
 #include "lowpassfilterdialog.h"
 #include "highpassfilterdialog.h"
+#include "gaussiannoisedialog.h"
+#include "saltandpeppernoisedialog.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>
@@ -38,6 +40,9 @@ public slots:
     void on_transformationsList_itemDoubleClicked(QListWidgetItem *item);
 
     void showImage();
+
+private slots:
+    void on_noisesList_itemDoubleClicked(QListWidgetItem *item);
 
 private:
     Ui::MainWindow *ui;

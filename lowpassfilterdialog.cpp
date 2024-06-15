@@ -6,7 +6,7 @@ LowPassFilterDialog::LowPassFilterDialog(QWidget* parent, cv::Mat& img) :
 {
     auto kLabel = new QLabel("Kernel size: ", this);
     dSpinBox = new QSpinBox(this);
-    dSpinBox->setMinimum(0);
+    dSpinBox->setMinimum(1);
     dSpinBox->setMaximum(30);
     dSpinBox->setSingleStep(1);
     connect(dSpinBox, &QSpinBox::valueChanged, this, &LowPassFilterDialog::on_dSpinBox_valueChanged);

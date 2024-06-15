@@ -21,6 +21,9 @@ void binaryIntensityLevelSlicing(const cv::Mat& src, cv::Mat& dst, int min, int 
 void applyLowPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize);
 void applyHighPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize);
 
+bool AddGaussianNoise(const cv::Mat& mSrc, cv::Mat &mDst,double Mean=0.0, double StdDev=10.0);
+void AddSaltAndPepperNoise(const cv::Mat& src, cv::Mat& dst, int probability=50);
+
 
 QPixmap matToPixmap(cv::Mat src, QImage::Format format = QImage::Format_Grayscale8,
                     int pixWidth=600, int pixHeight=300);
