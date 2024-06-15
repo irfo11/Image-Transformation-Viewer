@@ -1,6 +1,8 @@
 #ifndef IMGTOOLS_IMGTOOLS_H
 #define IMGTOOLS_IMGTOOLS_H
 
+#include <functional>
+
 #include <QPixmap>
 #include <QImage>
 
@@ -15,6 +17,10 @@ void gammaTransform(const cv::Mat& src, cv::Mat& dst, double c, double g);
 void histogramEqualization(const cv::Mat& src, cv::Mat& dst);
 void highlightingIntensityLevelSlicing(const cv::Mat& src, cv::Mat& dst, int min, int max);
 void binaryIntensityLevelSlicing(const cv::Mat& src, cv::Mat& dst, int min, int max);
+
+void applyLowPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize);
+void applyHighPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize);
+
 
 QPixmap matToPixmap(cv::Mat src, QImage::Format format = QImage::Format_Grayscale8,
                     int pixWidth=600, int pixHeight=300);

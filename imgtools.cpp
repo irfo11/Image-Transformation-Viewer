@@ -1,4 +1,5 @@
 #include "imgtools.h"
+#include <cmath>
 #include <QtCore> //qDebug
 
 namespace imgtools {
@@ -137,6 +138,15 @@ cv::Mat plotHistogram(	const cv::Mat src,
 
     return dst;
     // histogram is in "dst"
+}
+
+void applyLowPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize) {
+    cv::blur(src, dst, ksize);
+}
+
+void applyHighPassFilter(const cv::Mat& src, cv::Mat& dst, cv::Size_<int> ksize) {
+    cv::blur(src, dst, ksize);
+    dst = src-dst;
 }
 
 cv::Mat plotFourrierTransform(const cv::Mat src) {

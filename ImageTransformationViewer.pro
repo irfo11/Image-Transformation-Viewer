@@ -13,9 +13,11 @@ SOURCES += \
     binaryintensityslicingdialog.cpp \
     gammatransformationdialog.cpp \
     highlightingintensitylevelslicingdialog.cpp \
+    highpassfilterdialog.cpp \
     histogramequalizationdialog.cpp \
     imgtools.cpp \
     logtransformationdialog.cpp \
+    lowpassfilterdialog.cpp \
     main.cpp \
     mainwindow.cpp \
     negativetransformationdialog.cpp
@@ -25,9 +27,11 @@ HEADERS += \
     binaryintensityslicingdialog.h \
     gammatransformationdialog.h \
     highlightingintensitylevelslicingdialog.h \
+    highpassfilterdialog.h \
     histogramequalizationdialog.h \
     imgtools.h \
     logtransformationdialog.h \
+    lowpassfilterdialog.h \
     mainwindow.h \
     negativetransformationdialog.h
 

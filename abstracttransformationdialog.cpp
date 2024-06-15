@@ -19,6 +19,7 @@ AbstractTransformationDialog::AbstractTransformationDialog(QWidget *parent, cv::
 
     connect(this, &AbstractTransformationDialog::updateImage, static_cast<MainWindow*>(parent), &MainWindow::showImage);
 
+
     this->show();
 }
 
@@ -29,12 +30,17 @@ void AbstractTransformationDialog::on_applyButton_clicked()
 
 void AbstractTransformationDialog::on_cancelButton_clicked()
 {
+    restoreToOriginal();
     reject();
+}
+
+void AbstractTransformationDialog::closeEvent(QCloseEvent* event) {
+    restoreToOriginal();
+    accept();
 }
 
 AbstractTransformationDialog::~AbstractTransformationDialog()
 {
     qDebug() << "calling parent destructor";
-    restoreToOriginal();
     delete ui;
 }

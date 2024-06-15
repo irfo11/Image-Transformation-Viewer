@@ -11,6 +11,8 @@
 #include "histogramequalizationdialog.h"
 #include "highlightingintensitylevelslicingdialog.h"
 #include "binaryintensityslicingdialog.h"
+#include "lowpassfilterdialog.h"
+#include "highpassfilterdialog.h"
 
 #include <opencv2/core.hpp>
 #include <opencv2/imgcodecs.hpp>

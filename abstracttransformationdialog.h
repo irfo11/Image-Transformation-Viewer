@@ -33,6 +33,7 @@ public:
 private:
     void on_applyButton_clicked();
     void on_cancelButton_clicked();
+    virtual void closeEvent(QCloseEvent* event) override;
 
 signals:
     void updateImage();

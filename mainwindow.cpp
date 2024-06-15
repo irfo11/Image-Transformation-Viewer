@@ -14,7 +14,9 @@ MainWindow::MainWindow(QWidget *parent)
                                            "Gamma",
                                            "Histogram equalization",
                                            "Binary intenisity level slicing",
-                                           "Highlighting intensity level slicing"
+                                           "Highlighting intensity level slicing",
+                                           "Low pass filter",
+                                           "High pass filter"
                                        });
 
     ui->setupUi(this);
@@ -29,6 +31,9 @@ MainWindow::MainWindow(QWidget *parent)
     imageScene = new QGraphicsScene(ui->imageGraphicsView);
     histogramScene = new QGraphicsScene(ui->histogramGraphicsView);
     dftScene = new QGraphicsScene(ui->spectrumGraphicsView);
+
+    //imgtools::applyLowPassFilter(transformed_img, transformed_img, 200);
+
     showImage();
 }
 
@@ -76,6 +81,10 @@ void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
         transformationDialog = new HighlightingIntensityLevelSlicingDialog(this, transformed_img);
     } else if(item->text().compare("Binary intenisity level slicing") == 0) {
         transformationDialog = new BinaryIntensityLevelSlicingDialog(this, transformed_img);
+    } else if(item->text().compare("Low pass filter") == 0) {
+        transformationDialog = new LowPassFilterDialog(this, transformed_img);
+    } else if(item->text().compare("High pass filter") == 0) {
+        transformationDialog = new HighPassFilterDialog(this, transformed_img);
     }
 }
 
