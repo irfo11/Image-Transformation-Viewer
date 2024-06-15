@@ -3,6 +3,8 @@
 
 #include "abstracttransformationdialog.h"
 
+
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -24,16 +26,19 @@ MainWindow::MainWindow(QWidget *parent)
                               "Salt and pepper noise"
                           });
 
+    original_img = cv::Mat();
+
     ui->setupUi(this);
     ui->transformationsList->addItems(transformationsList);
     ui->noisesList->addItems(noiseList);
 
-    original_img = imread("C://Users//Irfo//Documents//fakultet//IV semestar//digitalno procesiranje signala//seminarski//slike//Slika5b_contrast.png", cv::IMREAD_GRAYSCALE);
+    /*original_img = imread("C://Users//Irfo//Documents//fakultet//IV semestar//digitalno procesiranje signala//seminarski//slike//Slika5b_contrast.png", cv::IMREAD_GRAYSCALE);
     if(original_img.empty()) {
         qDebug() << "Treba nesto smisliti";
     }
-    original_img.copyTo(transformed_img);
 
+    original_img.copyTo(transformed_img);
+*/
     imageScene = new QGraphicsScene(ui->imageGraphicsView);
     histogramScene = new QGraphicsScene(ui->histogramGraphicsView);
     dftScene = new QGraphicsScene(ui->spectrumGraphicsView);
@@ -72,6 +77,7 @@ void MainWindow::on_resetButton_clicked()
 
 void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
 {
+    if(this->original_img.empty()) return;
     qDebug() << item->text();
     QDialog* transformationDialog = nullptr;
     if(item->text().compare("Negative") == 0)
@@ -97,11 +103,22 @@ void MainWindow::on_transformationsList_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_noisesList_itemDoubleClicked(QListWidgetItem *item)
 {
+    if(this->original_img.empty()) return;
     QDialog* noiseDialog = nullptr;
     if(item->text().compare("Gaussian noise") == 0) {
         noiseDialog = new GaussianNoiseDialog(this, transformed_img);
     } else if(item->text().compare("Salt and pepper noise") == 0) {
         noiseDialog = new SaltAndPepperNoiseDialog(this, transformed_img);
     }
+}
+
+
+void MainWindow::on_addImageButton_clicked()
+{
+    QString fileName = QFileDialog::getOpenFileName(this, "Open image", "", "Images (*.jpeg, *.jpg, *.png)");
+    if(fileName == nullptr) return;
+    this->original_img = cv::imread(fileName.toStdString(), cv::IMREAD_GRAYSCALE);
+    original_img.copyTo(transformed_img);
+    showImage();
 }
 

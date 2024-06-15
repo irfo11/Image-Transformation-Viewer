@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QGraphicsScene>
 #include <QListWidgetItem>
+#include <QFileDialog>
 
 #include "negativetransformationdialog.h"
 #include "logtransformationdialog.h"
@@ -43,6 +44,8 @@ public slots:
 
 private slots:
     void on_noisesList_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_addImageButton_clicked();
 
 private:
     Ui::MainWindow *ui;
