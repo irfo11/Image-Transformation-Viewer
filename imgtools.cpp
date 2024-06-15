@@ -173,10 +173,11 @@ void AddSaltAndPepperNoise(const cv::Mat& src, cv::Mat& dst, int probability)
     {
         for(int j=1; j<dst.cols; j++)
         {
-            if(rand()%100 < probability) //add noise
+            double p = static_cast<double>(rand()) / static_cast<double>(RAND_MAX);
+            if(p < (probability/100.0)) //add noise
             {
-                if(rand()%2==1) dst.at<int>(i, j) = 0;
-                else dst.at<int>(i, j) = 255;
+                if(rand()%2==1) dst.at<uint8_t>(i, j) = 0;
+                else dst.at<uint8_t>(i, j) = 255;
             }
         }
     }

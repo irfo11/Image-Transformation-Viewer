@@ -115,7 +115,7 @@ void MainWindow::on_noisesList_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_addImageButton_clicked()
 {
-    QString fileName = QFileDialog::getOpenFileName(this, "Open image", "", "Images (*.jpeg, *.jpg, *.png)");
+    QString fileName = QFileDialog::getOpenFileName(this, "Open image", "", "Images (*.jpeg *.jpg *.png)");
     if(fileName == nullptr) return;
     this->original_img = cv::imread(fileName.toStdString(), cv::IMREAD_GRAYSCALE);
     original_img.copyTo(transformed_img);
